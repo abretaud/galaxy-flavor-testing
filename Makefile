@@ -57,6 +57,7 @@ test_api:
 
 test_ftp:
 	docker logs galaxy_test_container
+	docker exec galaxy_test_container bash -c 'cat /var/log/supervisor/proftpd-std*'
 	date > $(HOME)/time.txt && curl --fail -T $(HOME)/time.txt ftp://localhost:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
 	curl --fail ftp://localhost:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
 
