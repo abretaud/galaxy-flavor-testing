@@ -57,8 +57,10 @@ test_api:
 
 test_ftp:
 	docker logs galaxy_test_container
+	echo "-------------------"
 	docker exec galaxy_test_container bash -c 'cat /var/log/supervisor/proftpd-std*'
-	date > $(HOME)/time.txt && curl --fail -T $(HOME)/time.txt ftp://localhost:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
+	docker ps -a
+	date > $(HOME)/time.txt && curl --fail -T $(HOME)/time.txt ftp://127.0.0.1:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
 	curl --fail ftp://localhost:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
 
 test_bioblend:
