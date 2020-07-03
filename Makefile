@@ -57,6 +57,7 @@ test_api:
 
 test_ftp:
 	date > $(HOME)/time.txt && curl --fail -T $(HOME)/time.txt ftp://localhost:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
+	docker logs galaxy_test_container
 	curl --fail ftp://localhost:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
 
 test_bioblend:
