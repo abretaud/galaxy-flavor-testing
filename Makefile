@@ -56,12 +56,8 @@ test_api:
 	curl --fail $(BIOBLEND_GALAXY_URL)/api/version
 
 test_ftp:
-	docker logs galaxy_test_container
-	echo "-------------------"
-	docker exec galaxy_test_container bash -c 'cat /var/log/supervisor/proftpd-std*'
-	docker ps -a
 	date > $(HOME)/time.txt && curl --fail -T $(HOME)/time.txt ftp://127.0.0.1:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
-	curl --fail ftp://localhost:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
+	curl --fail ftp://127.0.0.1:8021 --user $(GALAXY_USER):$(GALAXY_USER_PASSWD)
 
 test_bioblend:
 	# Run bioblend nosetests with the same UID and GID as the galaxy user inside if Docker
